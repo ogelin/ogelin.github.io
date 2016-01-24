@@ -60,7 +60,7 @@ function createImageLayer() {
   img.onclick = imageOnclick;
   img.style.height = 'auto';
   img.style.width = '50vw';
-  img.src = "http//:172.31.192.118:8080/?action=snapshot&n=" + (++imageNr);
+  img.src = "http://172.31.192.118:8080/?action=snapshot&n=" + (++imageNr);
   var left = document.getElementById("left");
   left.insertBefore(img, left.firstChild);
   createImageLayer2();
