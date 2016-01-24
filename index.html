@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+  <style>
+    div.container {
+      display:inline-block;
+    }
+    html, body, div {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  </style>
+  </head>
+
+  <body onload="createImageLayer();">
+
+  <div id="left" class=""></div>
+  <div id="right" class=""></div>
+
+  <script>
+  /*var imageNr =0;
+  var finished = new Array(); // References to img objects which have finished downloading
+  var paused = false;
+  function createImageLayer() {
+  var img1 = new Image();
+  img1.style.visibility = "hidden";
+  img1.style.position = "fixed";
+  img1.style.zIndex = -1;
+  img1.onload = imageOnload;
+  img1.onclick = imageOnclick;
+  img1.style.height = '50%';
+  img1.style.width = '50%';
+  img1.src = "http://172.31.194.22:8080/?action=snapshot&n=" + (imageNr++);
+  var img2 = new Image(img1);
+  img1.style.left=0;
+  img2.style.right=0;
+  var left = document.getElementById("left");
+  var right = document.getElementById("right");
+  left.insertBefore(img1, left.firstChild);
+  right.insertBefore(img2, right.firstChild);
+  */
+
+  function createImageLayers(){
+    window.setTimeout(createImageLayer, 1);
+    window.setTimeout(createImageLayer2, 0);
+  }
+
+var imageNr = 0; // Serial number of current image
+var finished = new Array(); // References to img objects which have finished downloading
+var finished2 = new Array(); // References to img objects which have finished downloading
+var paused = false;
+
+function createImageLayer() {
+  var img = new Image();
+  img.style.position = "absolute";
+  img.style.zIndex = -1;
+  img.onload = imageOnload;
+  img.onclick = imageOnclick;
+  img.style.height = 'auto';
+  img.style.width = '50vw';
+  img.src = "http://172.31.194.22:8080/?action=snapshot&n=" + (++imageNr);
+  var left = document.getElementById("left");
+  left.insertBefore(img, left.firstChild);
+  createImageLayer2();
+}
+
+function createImageLayer2() {
+  var img = new Image();
+  img.style.position = "absolute";
+  img.style.zIndex = -1;
+  img.onload = imageOnload2;
+  img.onclick = imageOnclick;
+  img.style.height = 'auto';
+  img.style.width = '50vw';
+  img.style.left = '50vw';
+  img.src = "http://172.31.194.22:8080/?action=snapshot&n=" + (++imageNr);
+  var right = document.getElementById("right");
+  right.insertBefore(img, right.firstChild);
+}
+// Two layers are always present (except at the very beginning), to avoid flicker
+function imageOnload() {
+  this.style.zIndex = imageNr; // Image finished, bring to front!
+  while (1 < finished.length) {
+    var del = finished.shift(); // Delete old image(s) from document
+    del.parentNode.removeChild(del);
+  }
+  finished.push(this);
+  if (!paused) createImageLayer();
+}
+
+function imageOnload2() {
+  this.style.zIndex = imageNr; // Image finished, bring to front!
+  while (1 < finished2.length) {
+    var del = finished2.shift(); // Delete old image(s) from document
+    del.parentNode.removeChild(del);
+  }
+  finished2.push(this);
+  if (!paused) createImageLayer2();
+}
+function imageOnclick() { // Clicking on the image will pause the stream
+  paused = !paused;
+  if (!paused) createImageLayer();
+  if (!paused) createImageLayer2();
+}
+
+  </script>
+  </body>
+</html>
