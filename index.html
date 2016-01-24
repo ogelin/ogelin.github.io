@@ -75,7 +75,7 @@ function createImageLayer2() {
   img.style.height = 'auto';
   img.style.width = '50vw';
   img.style.left = '50vw';
-  img.src = "http://172.31.192.118:8080//?action=snapshot&n=" + (++imageNr);
+  img.src = "http://172.31.192.118:8080/?action=snapshot&n=" + (++imageNr);
   var right = document.getElementById("right");
   right.insertBefore(img, right.firstChild);
 }
