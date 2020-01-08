@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est d'introduire les paths de SVG permettant de réaliser des figures plus complexes que des cercles ou des carrés. </p>
+            <p> Dans ce premier exercice nous allons utiliser les paths pour créer d'autres figures géométriques simples mais classiques </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> En utilisant les données contenues dans la variable <b>triangleGauche</b>, dessiner un triangle pointant vers la gauche </li>
+				<li> En vous inspirant de la variable <b>triangleGauche</b>, créer une variable <b>triangleDroit</b> représentant un triangle symétrique et le dessiner </li>
+			</ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",1000)
+            				.attr("height",500);
+
+			var group = canvas.append("g").attr("transform", "translate(500,250)"); // Nouvelle origine pour dessiner les figures géométriques
+
+			var triangleGauche = [
+				{x:-400,y:0},
+				{x:0,y:-200},
+				{x:0,y:200},
+				{x:-400,y:0}
+			];
+
+            // TODO Faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

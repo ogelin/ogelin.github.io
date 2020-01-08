@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+            border-style: solid;
+            border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de comprendre les principes de visualisation à partir d'un tableau de données <br></p>
+            <p> Dans ce deuxième exercice, nous allons créé un petit bar chart à partir du tableau de données suivant : <b>[20, 50, 80, 40, 50, 100]</b>. Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Dessiner un barchart avec ces données. La largeur des barres est de 20 pixels, la hauteur est proportionnelle aux données mais la valeur maximale doit faire la hauteur totale du canvas
+                </li>
+                <li> Colorer les barres en bleu </li>
+            </ol>
+        </div>
+        <script>
+            // Création d'un canvas svg
+            var canvas = d3.select("body")
+							.append("svg")
+							.attr("width", 400)
+							.attr("height", 500);
+
+            // Hauteur des barres
+            var datas = [20, 50, 80, 40, 50, 100];
+
+            // Question 1
+            var bars = canvas.selectAll("rect")
+							.data(datas)
+							.enter()
+							.append("rect")
+							.attr("height", function(d) {
+							return d * 5;
+							})
+							.attr("width", 20)
+							.attr("x", function(d, i) {
+							return i * 25;
+							})
+							.attr("y", function(d) {
+							return 500 - d * 5;
+							})
+							.attr("fill", "blue"); // Question 2
+        </script>
+    </body>
+</html>

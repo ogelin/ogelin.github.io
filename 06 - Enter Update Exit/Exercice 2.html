@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de comprendre et de manipuler les fonctions de d3 suivantes : <b>data()</b> (Update), <b>enter()</b> (Enter) et <b>exit()</b> (Exit). <br>
+                Dans ce deuxième exercice nous allons nous focaliser sur les concepts d'Update et d'Enter.
+            </p>
+            <p> Le canvas possède un début de barChart avec les données suivantes : [10,15]. Soit le tableau de données suivant : <b>[20,25,30]</b>.
+                Le but de l'exercice est de compléter le barChart avec ces valeurs. Une échelle vous est fournie pour mettre en forme les valeurs.<br>
+                Il vous est demandé de réaliser le trajet suivant :
+            </p>
+            <ol>
+                <li> Rajouter dans le tableau des données existantes les nouvelles données </li>
+                <li> Compléter le barChart avec les valeurs supplémentaires <b> sans redessiner le canvas entièrement</b></li>
+                <li> Mettre en évidence les anciennes et les nouvelles valeurs. Par exemple colorer en vert les anciennes valeurs et en rouge les nouvelles </li>
+            </ol>
+        </div>
+        <script>
+            var datas = [10,15];
+            var newDatas = [20,25,30];
+
+            var canvas = d3.select("body")
+                     			.append("svg")
+                     			.attr("width",200)
+                     			.attr("height",400);
+
+            // Création de l'échelle
+            var heightScale = d3.scaleLinear()
+										.domain([10, 35])
+										.range([100, 400]);
+
+            // Création du début du barChart
+            canvas.selectAll("rect").data(datas)
+									.enter()
+									.append("rect")
+									.attr("x",function(d,i){return i*25 + 10})
+									.attr("y",function(d){return heightScale(35) - heightScale(d)})
+									.attr("width",20)
+									.attr("height", function(d){return heightScale(d)});
+
+            // TODO : faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

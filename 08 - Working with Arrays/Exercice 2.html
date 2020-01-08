@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de cet exercice est de réaliser des manipulations sur des données plus complexes qu'à l'exercice 1. Cette fois-ci nos données seront sous la forme d'un tableau d'objets.
+             Chaque objet possède trois propriétés nommées <b>a</b>, <b>b</b> et <b>c</b>. </p>
+			 <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Compléter la fonction <i>intervalle</i> calculant le plus petit intervalle contenant l'ensemble des valeurs prises par la propriété <b>a</b>.</li>
+                <li> Compléter la fonction <i>objet</i> qui retourne l'objet possédant la plus grande valeur prise par <b>b</b> et sa position dans le tableau de départ.</li>
+                <li> Compléter la fonction <i>tri</i> qui classe les objets par ordre croissant par rapport à leur valeur de <b>c</b>.</li>
+            </ol>
+        </div>
+        <div>
+            <p id="intervalle"> Intervalle de a : </p>
+            <p id="objet"> Objet avec le plus petit b : </p>
+            <p id="tri"> Tri par rapport à c puis b : </p>
+        </div>
+        <script>
+            // Données à utiliser
+			var data = [{a:10, b:20, c:70}, {a:30, b:50, c:100}, {a:15, b:90, c:100}];
+
+			// Fonctions à compléter
+			function intervalle(d){
+				return 0;
+			};
+
+			function objet(d){
+				return 0;
+			};
+
+			function tri(d){
+				return 0;
+			};
+
+			// TODO : Faire les manipulations de l'énoncé
+
+			// Affichage des résultats
+			var question1 = intervalle(data);
+            var question2 = objet(data);
+			var question3 = tri(data);
+			d3.select("#intervalle").html(d3.select("#intervalle").html() + JSON.stringify(question1));
+			d3.select("#objet").html(d3.select("#objet").html() + JSON.stringify(question2));
+			d3.select("#tri").html(d3.select("#tri").html() + JSON.stringify(question3));
+
+        </script>
+    </body>
+</html>

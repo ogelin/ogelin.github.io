@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 4 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de se familiariser avec plusieurs formes vectorielles simples et de les dessiners sur un canva </p>
+            <p> Dans ce quatrième exercice nous allons nous servir de la superposition pour créer un disque en "arc-en-ciel".
+                Le script javaScript possède deux tableau contenant le rayon et la coueur de plusieurs disques. <br>Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Faire un disque "arc-en-ciel" où chaque couleur est comprise entre deux rayons de disque (ne pas utiliser les outils de d3 mais une boucle <i>for</i>) </li>
+                <li> D'après vous, quel est l'inconvénient de cette méthode ? (Supposez qu'il n'y ait pas 7 mais des milliers de disques différents) </li>
+            </ol>
+        </div>
+        <script>
+            // Création d'un canvas svg de largeur 350 et de hauteur 350
+            var canvas = d3.select("body")
+                .append("svg")
+                .attr("width", 350)
+                .attr("height", 350);
+
+            // Couleur et rayon de plusieurs disques
+            var color = ["red", "orange", "yellow", "green", "cyan", "blue", "purple"];
+            var radius = [175, 150, 125, 100, 75, 50, 25]
+
+            // TODO : faire les manipulations de l'énoncé et répondre à la question
+
+        </script>
+    </body>
+</html>

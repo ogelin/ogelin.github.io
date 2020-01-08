@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 4 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les tree layouts (diagrammes en arbre) permettant de représenter des données en arborescence comme dans un arbre généalogique. </p>
+            <p> En pratique, on ne vas pas créer un lien pour chaque liaison à faire. On possède un fichier (<a href="./famille.json"> lien </a>) avec déjà les liens à l'intérieur et nous allons nous servir des outils de d3 pour créer un arbre en toute facilité. </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Reprendre l'exercice 2 ou l'exercice 3 </li>
+				<li> Modifier le code afin que les points soient alignés en commençant par l'extermité de l'arbre et non son origine </li>
+			</ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",500)
+            				.attr("height",500)
+							.append("g")
+							.attr("transform", "translate(50,50)");
+
+			// Question 2
+			var tree = d3.cluster().size([400,400]);
+
+			// Question 1
+			d3.json("./famille.json").then(function (data) {
+        var root = d3.hierarchy(data);
+        tree(root);
+
+				var nodes = root.descendants();
+				var links = root.links();
+
+
+				var node = canvas.selectAll(".node")
+									.data(nodes)
+									.enter()
+									.append("g")
+										.attr("class","node")
+										.attr("transform", function(d) {return "translate(" + d.y + "," + d.x + ")"});
+
+				node.append("circle")
+						.attr("r",5)
+						.attr("fill","red");
+
+
+				node.append("text").text(function(d) {return d.data.name;}).attr("y",-5);
+
+
+        var link = d3.linkHorizontal()
+                        .x(function(d) {
+                          return d.y;
+                        })
+                        .y(function(d) {
+                          return d.x;
+                        });
+
+				canvas.selectAll(".link")
+						.data(links)
+						.enter()
+						.append("path")
+						.attr("class","link")
+						.attr("fill","none")
+						.attr("stroke","#ADADAD")
+						.attr("d", d=>link(d));
+
+			});
+        </script>
+    </body>
+</html>

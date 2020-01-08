@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de cet exercice est de réaliser de simples manipulations sur des données sous la forme d'un tableau (Array).</p>
+            <p> Soit l'array suivante : <b>[10, 50, 40, 90, 20, 60]</b>. Il vous est demandé de réaliser le travail suivant : </p>
+            <ol>
+                <li> Donner le maximum (variable <i>maxData</i>) et le minimum (variable <i>minData</i>) de l'array en utilisant les fonctionnalités de d3. </li>
+                <li> Calculer la somme des valeurs (variable <i>sumData</i>). </li>
+				<li> Donner la moyenne et la variance des valeurs (variables <i>meanData</i> et <i>variationData</i>). Arrondir à 1 décimale près si besoin. </li>
+                <li> Trier les valeurs du tableau dans l'ordre croissant. </li>
+            </ol>
+        </div>
+        <div>
+            <p id="max"> Maximum : </p>
+            <p id="min"> Minimum : </p>
+            <p id="somme"> Somme : </p>
+            <p id="moyenne"> Moyenne : </p>
+            <p id="ecart-type"> Ecart-Type : </p>
+        </div>
+        <script>
+			// Données à utiliser
+            var data = [10, 50, 40, 90, 20, 60];
+
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width", 500)
+            				.attr("height", 500);
+
+			// Variables à calculer
+            var maxData,
+                minData,
+                sumData,
+                meanData,
+                variationData;
+
+			// TODO : Faire les manipulations de l'énoncé
+
+			// Affichage des données statistiques précédentes
+            d3.select("#max").html(d3.select("#max").html() + maxData);
+            d3.select("#min").html(d3.select("#min").html() + minData);
+            d3.select("#somme").html(d3.select("#somme").html() + sumData);
+            d3.select("#moyenne").html(d3.select("#moyenne").html() + meanData);
+            d3.select("#ecart-type").html(d3.select("#ecart-type").html() + variationData);
+
+
+            // Créer une fonction échelle pour que les données aient une valeur comprise entre 100 et 500
+            var heightScale = d3.scaleLinear()
+            .domain([10, 90])
+            .range([100,500]);
+
+            // Dessiner un barchart avec ces données
+
+            var bars = canvas.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("height", function(d) {
+            return heightScale(d);
+            })
+            .attr("width", 50)
+            .attr("x", function(d, i) {
+            return 40 + i * 75;
+            })
+            .attr("y", function(d) {
+            return heightScale(90) - heightScale(d);
+            });
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 3 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de comprendre et de manipuler les fonctions de d3 suivantes : <b>data()</b> (Update), <b>enter()</b> (Enter) et <b>exit()</b> (Exit). <br>
+                Dans ce troisième exercice nous allons nous focaliser sur les concepts d'Update et d'Exit.
+            </p>
+            <p> Le canvas possède déjà 5 cercles dessinés en noir. Soit le tableau de données suivant correspondant à des valeurs de rayon de cercle : <b>[20,25,30]</b>. <br>
+                Il vous est demandé de réaliser le trajet suivant :
+            </p>
+            <ol>
+                <li> En utilisant la fonction data() de d3, modifier le rayon des deux cercles présents pour les faires correspondres aux deux premières valeurs du tableau </li>
+                <li> Colorer en bleu les cercles modifiés par la fonction data() </li>
+                <li> En utilisant la fonction exit() de d3, supprimer les cercles restants </li>
+            </ol>
+        </div>
+        <script>
+            var position = [50,100,150,200,250];
+
+            var datas = [20,25,30];
+
+            var canvas = d3.select("body")
+                     			.append("svg")
+                     			.attr("width",500)
+                     			.attr("height",500);
+
+            // Création des 5 cercles
+            canvas.selectAll("circle")
+								.data(position)
+            					.enter()
+            					.append("circle")
+            					.attr("cx",function(d){return d})
+            					.attr("cy",function(d){return d})
+            					.attr("r",function(d){return d/5});
+
+            // TODO : faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

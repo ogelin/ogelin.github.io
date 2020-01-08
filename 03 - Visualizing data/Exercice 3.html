@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 3 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+            border-style: solid;
+            border-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de comprendre les principes de visualisation à partir d'un tableau de données <br></p>
+            <p> Dans ce troisième exercice, nous allons reprendre <a href="../02 - Basic SVG shapes/Exercice 4.html">l'exercice 4 du chapitre 2</a> mais en utilisant cette fois les outils de d3.js.
+                <br> Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Faire un disque "arc-en-ciel" où chaque couleur est comprise entre deux rayons de disque (ne pas utiliser une boucle <i>for</i> mais les outils de d3) </li>
+                <li> D'après vous, quel est l'avantage de cette méthode ? (Supposez qu'il n'y ait pas 7 mais des milliers de disques différents) </li>
+            </ol>
+        </div>
+        <script>
+            // Caracteristique des cercles à afficher (couleur et rayon)
+            var color = ["red", "orange", "yellow", "green", "cyan", "blue", "purple"];
+            var radius = [175, 150, 125, 100, 75, 50, 25];
+            var cercle = [];
+
+            // Concaténation des informations dans un tableau (utiliser ce tableau pour la fonction data)
+            for (i = 0; i < 7; i++) {
+            	cercle[i] = {
+            		color: color[i], // Pour accéder à la couleur du i-ème cercle : cercle[i].color
+            		radius: radius[i] // Pour accéder au rayon du i-ème cercle : radius[i].color
+            	};
+            }
+
+            // Création d'un canvas svg
+            var canvas = d3.select("body")
+            			.append("svg")
+            			.attr("width", 350)
+            			.attr("height", 350);
+
+            // TODO : faire les manipulations de l'énoncé et répondre à la question
+        </script>
+    </body>
+</html>

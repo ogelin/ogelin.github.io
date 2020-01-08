@@ -1,0 +1,14 @@
+{
+	"name": "Jean",
+	"value": 100,
+	"children": [
+		{"name": "Marie","value": 75},
+		{"name": "Pierre","value":50},
+		{"name": "Paul", "value":50,
+			"children" : [
+			{"name": "Sarah", "value":25},
+			{"name": "Jacque", "value":25}
+			]
+		}
+		]
+	}

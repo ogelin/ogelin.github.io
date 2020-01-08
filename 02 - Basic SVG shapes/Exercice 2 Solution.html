@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <title> Exercice 2 Solution </title>
+		<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: black;}
+        </style>
+	</head>
+
+	<body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de se familiariser avec plusieurs formes vectorielles simples et de les dessiners sur un canva </p>
+            <p> Ce deuxième exercice introduit les notions de superposition. Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Dessiner un disque bleu au centre du canvas de rayon 50 pixels </li>
+                <li> Dessiner un rectangle noir rempli de hauteur 75 pixels et de largeur 50 pixels en haut à gauche du canvas </li>
+                <li> Dessiner un carré rouge rempli de côté 50 pixels juste à droite du rectangle noir </li>
+                <li> Dessiner une ligne jaune traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+                    La ligne doit être au-dessus des autres dessins
+                </li>
+                <li> Dessiner une ligne verte traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+                    La ligne doit être en-dessous des autres dessins
+                </li>
+            </ol>
+        </div>
+		<script>
+		// Création d'un canvas svg de largeur 400 et de hauteur 400
+		var canvas = d3.select("body")
+					   .append("svg")
+					   .attr("width",400)
+					   .attr("height", 400);
+
+		// Question 5 : Dessiner une ligne verte traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+		// La ligne doit être sous les autres dessins. On doit faire cette étape en premier car les autres dessins vont "écraser" cette ligne.
+		var greenline = canvas.append("line")
+						.attr("x1",0)
+						.attr("y1", 0)
+						.attr("x2", 400)
+						.attr("y2", 400)
+						.attr("stroke", "green")
+						.attr("stroke-width", 5);
+
+		// Question 1 : Dessiner un disque bleu au centre du canvas de rayon 50 pixels
+		var blueCircle = canvas.append("circle")
+						   .attr("cx", 200)
+						   .attr("cy", 200)
+						   .attr("r", 50)
+						   .attr("fill", "blue");
+
+		// Question 2 : Dessiner un rectangle noir (rempli) de hauteur 75 pixels et de largeur 50 pixels en haut à gauche du canvas
+		var blackRect = canvas.append("rect")
+						 .attr("width", 50)
+						 .attr("height", 75);
+
+		// Question 3 : Dessiner un carré rouge (rempli) de côté 50 pixels juste à droite du rectangle noir
+		var redSquare = canvas.append("rect")
+						 .attr("width", 50)
+						 .attr("height", 50)
+						 .attr("fill", "red")
+						 .attr("x",50);
+
+		// Question 4 : Dessiner une ligne jaune traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+		// La ligne doit être sur les autres dessins
+		var greenline = canvas.append("line")
+						.attr("x1",0)
+						.attr("y1", 400)
+						.attr("x2", 400)
+						.attr("y2", 0)
+						.attr("stroke", "yellow")
+						.attr("stroke-width", 5);
+
+		</script>
+	</body>
+</html>

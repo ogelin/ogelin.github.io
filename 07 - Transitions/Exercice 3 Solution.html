@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exercice 3 Solution </title>
+	<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+	<style>
+		svg  {border-style: solid;
+			  border-color: blue;}
+	</style>
+</head>
+
+<body>
+
+<div class="énoncé">
+	<p> Dans cet exercice nous allons aller plus loin en manipulant les transitions cycliques. On pourrait voir cela comme une horloge simplifiée </p>
+	<p> Il vous est demandé de réaliser le trajet suivant : </p>
+	<ol>
+		<li> Faire aller le carré tout à droite en une seconde </li>
+		<li> Puis le faire aller tout en bas en une seconde </li>
+		<li> Puis le faire aller tout à gauche en une seconde </li>
+		<li> Puis le faire revenir à son point de départ en une seconde </li>
+		<li> Répéter les étapes 1 à 4 indéfiniment. Bravo, vous venez de créer une horloge à quatre temps ! </li>
+		<li> Bonus : changez les couleurs en fonction de la position du carré </li>
+	</ol>
+</div>
+	<script>
+
+	var canvas = d3.select("body")
+					.append("svg")
+					.attr("width",500)
+					.attr("height",500);
+
+	var square = canvas.append("rect")
+						.attr("x", 0)
+						.attr("y", 0)
+						.attr("height", 50)
+						.attr("width", 50);
+
+	function repeat() {
+		square
+			.transition().ease(d3.easeLinear).duration(1000).attr("x",450).attr("fill", "blue")
+			.transition().ease(d3.easeLinear).duration(1000).attr("y",450).attr("fill", "green")
+			.transition().ease(d3.easeLinear).duration(1000).attr("x",0).attr("fill", "yellow")
+			.transition().ease(d3.easeLinear).duration(1000).attr("y",0).attr("fill", "red")
+			.on("end", repeat);
+		};
+
+		repeat();
+
+	</script>
+</body>
+
+</html>

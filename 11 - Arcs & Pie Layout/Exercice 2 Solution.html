@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les pie charts (diagramme circulaire également appelé camembert), autre diagramme permettant la visualisation de données. </p>
+            <p> Dans ce deuxième exercice nous allons nous servir des arc pour créer un pie chart représentant la répartition d'âge d'une population.
+			Les données sont sous la forme d'un tableau comprenant la classe d'âge ciblée et la population correspondante. </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Constuire une échelle de couleur pour représenter chaque classe par une couleure distincte dans le pie chart (les couleurs sont au choix) </li>
+                <li> Créer un pie chart de rayon 250 pixels représentant les données </li>
+                <li> Ajouter du texte pour expliciter la classe d'âge représentée dans chaque part du diagramme. Le texte doit être centré dans chaque part du diagramme </li>
+            </ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",600)
+            				.attr("height",600);
+
+            var data = [
+					{classe:"<5",valeur:5000},
+					{classe:"5-18",valeur:20000},
+					{classe:"18-30",valeur:80000},
+					{classe:"30-60",valeur:20000},
+					{classe:">60", valeur:8000}
+					];
+
+			var group = canvas.append("g").attr("transform","translate(300,300)");
+
+			// Question 1
+			var color = d3.scaleOrdinal().range(["purple","blue","green","orange","red"]);
+
+			//Question 2
+			// Utiliser entre autres les fonctions d3.svg.arc(), d3.layout.pie()
+			var arc = d3.arc()
+							.innerRadius(0)
+							.outerRadius(250);
+
+			var pie = d3.pie()
+								.value(function(d) {return d.valeur;});
+
+			var arcs = group.selectAll(".arc")
+							.data(pie(data))
+							.enter()
+							.append("g")
+							.attr("class","arc");
+
+			arcs.append("path")
+						.attr("d",arc)
+						.attr("fill", function(d) {return color(d.data.classe)});
+
+			// Question 3
+			arcs.append("text")
+				.attr("transform", function(d) {return "translate("+arc.centroid(d)+")";})
+				.attr("text-anchor","middle")
+				.attr("font-size","1.5em")
+				.text(function(d) {return d.data.classe});
+
+            // TODO Faire les manipulations de l'énoncé
+        </script>
+    </body>
+</html>

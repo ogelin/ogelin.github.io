@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 3 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est d'introduire les paths de SVG permettant de réaliser des figures plus complexes que des cercles ou des carrés. </p>
+            <p> Dans ce troisième exercice nous allons présenter une autre utilisation des paths : la création de line chart. <br>
+                Les axes/échelles/marges sont déjà implémentées. Nous allons ici visualiser les ventes d'une entreprise sur quelques années sous la forme d'un LineChart
+            </p>
+            <p> Il vous est demandé de faire le travail suivant :</p>
+            <ol>
+                <li> Créer une fonction <i> line </i> permettant de mettre en forme les données en utilisant les échelles fournies </li>
+                <li> Créer un lineChart avec la fonction nouvellement créée </li>
+            </ol>
+        </div>
+        <script>
+            // Marges du canvas
+            var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                width = 600 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            // Echelle horizontale
+            var x = d3.scaleLinear()
+                .range([0, width])
+				.domain([2011, 2016]);
+
+            // Echelle verticale
+            var y = d3.scaleLinear()
+                .range([height, 0])
+				.domain([0, 1000]);
+
+            // Données à utiliser
+            var datas = [
+				{annee: 2011, ventes: 200},
+				{annee: 2012, ventes: 400},
+				{annee: 2013, ventes: 300},
+				{annee: 2014, ventes: 600},
+				{annee: 2015, ventes: 500},
+				{annee: 2016, ventes: 900}
+            ];
+
+            // Creation de l'axe horizontal
+            var xAxis = d3.axisBottom(x)
+							.tickFormat(d3.format('.0f'))
+							.ticks(5);
+
+            // Creation de l'axe vertical
+            var yAxis = d3.axisLeft(y);
+
+            // Création du canvas
+            var svg = d3.select("body")
+						.append("svg")
+						.attr("width", width + margin.left + margin.right)
+						.attr("height", height + margin.top + margin.bottom)
+						.append("g")
+						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Axe horizontal
+            svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(xAxis)
+                  .append("text")
+            .attr("x", width)
+                  .attr("y", -20)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Année");
+
+            // Axe vertical
+            svg.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis)
+                  .append("text")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Ventes");
+
+            // TODO Faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

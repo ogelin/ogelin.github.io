@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+            .axis path,
+            .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter et manipuler les histogrammes (bar chart) dans D3.js. <br> Dans le cas où les données n'ont pas à êtres traitées et peuvent être affichées directement,
+                il n'est pas nécessaire de passer par le layout. Ce sera le cas dans cet exercice où l'on souhaite afficher les ventes mensuelles d'une société pour l'année 2015.
+				<br> Les données se trouvent à <a href = "./exercice1.csv"> cette adresse</a>.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>band</b> pour l'axe horizontal. Utiliser <b>.range</b> pour obtenir simplement l'emplacement des mois sur l'axe.
+                    <br> Attention le domaine de la fonction verticale doit être obtenu à partir des données et non être inscrit en dur !
+                </li>
+                <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
+                <li> Ajouter les colonnes de l'histogramme.</li>
+                <li> Ajouter un titre de taille 20 pixels, centré en haut de l'histogramme et en caractère gras. </li>
+            </ol>
+        </div>
+        <script>
+            var margin = {
+                top: 50,
+                right: 30,
+                bottom: 50,
+                left: 70
+            };
+
+            var width = 1000 - margin.left - margin.right,
+                height = 700 - margin.top - margin.bottom;
+
+            var canvas = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.csv("exercice2.csv").then(function(data) {
+
+				// Permet de convertir en nombre JavaScript les strings représentant les ventes dans data
+                function conversion(vente) {
+                    return parseFloat(vente.replace(/ /g, ''));
+                };
+
+                // Question 1
+
+                // Axe vertical
+                var y = d3.scaleLinear()
+                    .range([height, 0])
+                    .domain([0,
+                        d3.max(data, function(m) {
+                            return conversion(m.Ventes);
+                        })
+                    ]);
+
+                var yAxis = d3.axisLeft(y)
+                    .tickFormat(d3.format("$1,.0f")); // Permet de formatter l'affichage de l'axe vertical
+
+                // On va récupérer le nom de tous les mois dans le tableau mois
+                var mois = [];
+                data.forEach(function(obj) {
+                    mois.push(obj.Mois);
+                })
+
+                // Calcul de la largeur de chaque colonne
+                var barWidth = width / data.length;
+
+                // Axe horizontal
+                var x = d3.scaleBand()
+                    /* Normalement la fonction ordinal associe un élément de domain à un élément de range.
+                    Pour éviter de devoir écrire en dur la position des mois dans range, on utilise rangeBands qui va le faire automatiquement */
+                    .range([0, width])
+                    .domain(mois);
+
+                var xAxis = d3.axisBottom(x)
+                    .tickSize(10, 0);
+
+                // Question 2
+                canvas.append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+
+                canvas.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis);
+
+                // Question 3
+                var bars = canvas.selectAll(".bar")
+                    .data(data)
+                    .enter()
+                    .append("g");
+
+                bars.append("rect")
+                    .attr("class", "bar")
+                    .attr("x", function(d) {
+                        return x(d.Mois) + 5;
+                    })
+                    .attr("y", function(d) {
+                        return y(conversion(d.Ventes))
+                    })
+                    .attr("width", function(d) {
+                        return barWidth - 10;
+                    })
+                    .attr("height", function(d) {
+                        return height - y(conversion(d.Ventes));
+                    })
+                    .attr("fill", "steelblue");
+
+                // Question 4
+                canvas.append("text")
+                    .attr("x", width / 2)
+                    .attr("y", -margin.top / 2 + 5)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "30px")
+                    .style("font-weight", "bold")
+                    .text("Ventes mensuelles de l'entreprise");
+            });
+        </script>
+    </body>
+</html>

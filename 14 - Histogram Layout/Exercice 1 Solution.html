@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter et manipuler les histogrammes (bar chart) dans D3.js. Dans cet exercice vous avez un fichier contenant 300 nombres représentant les âges de 300 personnes (entre 0 et 100 ans).
+				Le but de l'exercice est de réaliser un histogramme permettant de voir les classes d'âges par décennie de la population choisie, c'est-à-dire combien de personne ont entre 0 et 10 ans, entre 11 et 20 ans etc.
+				Le fichier se situe à <a href = "./exercice1.csv"> cette adresse</a>.</p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Charger les données dans le layout et indiquer 10 classes. </li>
+                <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
+                <li> Ajouter les "bar" de l'histogramme. On peut voir ces "bar" comme des <b>rectangles</b>. </li>
+                <li> Ajouter un texte dans chaque rectangle indiquant la population de chaque classe. Le texte doit être situé dans le bord supérieur du rectangle. </li>
+            </ol>
+        </div>
+        <script>
+            var margin = {
+                top: 20,
+                right: 40,
+                bottom: 20,
+                left: 10
+            };
+
+            var width = 800 - margin.left - margin.right,
+                height = 800 - margin.top - margin.bottom;
+
+            var canvas = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.csv("exercice1.csv").then(function(data) {
+
+				// On convertit les données en entier
+                var map = data.map(function(d) {
+                    return parseInt(d.Age);
+                });
+
+				// Question 1
+                var histogram = d3.histogram()
+                    .thresholds(10)(map);
+
+				// Question 2
+                var y = d3.scaleLinear()
+                    .domain([0, d3.max(histogram.map(function(i) {
+                        return i.length;
+                    }))])
+                    .range([height, 0]);
+
+                var x = d3.scaleLinear()
+                    .domain([0, d3.max(map)])
+                    .range([0, width]);
+
+                var xAxis = d3.axisBottom(x);
+
+                var yAxis = d3.axisRight(y);
+
+                canvas.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+
+                canvas.append("g")
+                    .attr("transform", "translate(" + width + ", 0)")
+                    .call(yAxis);
+console.log(histogram)
+				// Question 3
+                var bars = canvas.selectAll(".bar")
+                    .data(histogram)
+                    .enter()
+                    .append("g")
+                    .attr("class", "bar")
+
+                bars.append("rect")
+                    .attr("x", function(d) {
+                        return x(d.x0)
+                    })
+                    .attr("y", function(d) {
+                        return y(d.length)
+                    })
+                    .attr("width", function(d) {
+                        return x(histogram[0].x1) - x(histogram[0].x0) - 1;
+                    })
+                    .attr("height", function(d) {
+                        return height - y(d.length);
+                    })
+                    .attr("fill", "steelblue");
+
+				// Question 4
+                bars.append("text")
+                    .attr("x", function(d) {
+                        return x(d.x0)
+                    })
+                    .attr("y", function(d) {
+                        return y(d.length)
+                    })
+                    .attr("dy", "20px")
+                    .attr("dx", function(d) {
+                        return (x(histogram[0].x1) - x(histogram[0].x0) - 1) / 2
+                    })
+                    .attr("fill", "white")
+                    .attr("text-anchor", "middle")
+                    .text(function(d) {
+                        return d.length
+                    });
+            });
+        </script>
+    </body>
+</html>

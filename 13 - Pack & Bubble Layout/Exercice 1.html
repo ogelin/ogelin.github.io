@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+			<p> Le but de ce chapitre est de présenter d'autres layout pour afficher des données.
+				Dans cet exercice on utilisera le même fichier JSON qu'au chapitre 12 à l'exception de l'ajout pour chaque membre de la famille d'un paramètre <b> value </b>.
+				Le fichier modifié se trouve à <a href="./exercice1.json"> cette adresse </a> .</p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Charger le fichier JSON contenant les liens de parentés de la famille </li>
+				<li> Mettre dans une variable <i> node </i> les données du fichier traitées avec le layout </li>
+				<li> Afficher les données sous forme de cercle où chaque cercle représente une personne et où un enfant est inclus dans le cercle du parent.
+					 Si le layout est bien utilisé les positions des cercles sont disponibles dans les attributs .x et .y des données des noeuds </li>
+				<li> Ajouter le nom des personnes. Si la personne a un enfant son nom doit être en haut du cercle. Sinon son nom est au centre du cercle </li>
+			</ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",500)
+            				.attr("height",500)
+							.append("g")
+							.attr("transform", "translate(50,50)");
+
+			var pack = d3.pack().size([400,400]).padding(5);
+
+			// TODO : Faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

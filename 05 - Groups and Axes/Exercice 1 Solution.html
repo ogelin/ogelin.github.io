@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+				border-style: solid;
+				border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les axes afin de permettre d'expliquer les graphiques. Nous prendrons le graphe de <a href="../04 - Scales/Exercice 1.html">l'exercice 1 du chapitre 4</a><br> que nous allons améliorer.</p>
+            <p> Dans ce premier exercice nous allons préparer le graphe en introduisant les marges afin de permettre de facilement créer des axes. Les marges sont des espaces dans le canvas qui permettent de décaler le graphe. On a donc un espace dans lequel on peut écrire du texte. <br>
+                Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Créer la largeur et la hauteur effective du canvas (taille de la zone dans laquelle on veut dessiner (exemple : largeur effective = largeur du canvas - marge à gauche - marge à droite). <br>
+                     On prendra comme taille de canvas : 250 pixels en largeur et 500 en hauteur </li>
+				<li> Créer le canvas en utilisant les notations précédentes  </li>
+                <li> Recréer le graphe de l'exercice 1 du chapitre 4 en utilisant ces nouvelles notations </li>
+                <li> Ecrire le titre suivant en gras : "Notes sur 100". Le titre doit être au-dessus du graphe (dans la marge du haut) </li>
+                <li> Réecrire un titre semblable sous le graphe (dans la marge du bas) </li>
+            </ol>
+            <ul>
+                <b>Remarques :</b>
+                <li> Ressource pour les conventions sur les marges dans un svg : <a href = > https://gist.github.com/mbostock/3019563 </a></li>
+                <li> Pour les questions 5 et 6, il faudra légèrement modifier la position du texte pour le recentrer (.attr("x",...) et .attr("y",...)
+                <li> Pour la question 6 la fonction .attr("transform", "translate(<b>x,y</b>)") de d3 sera utile.</li>
+            </ul>
+        </div>
+        <script>
+            // Données à utiliser
+            var datas = [20, 50, 80, 40, 50, 100];
+
+            // Aide
+            var maxData = Math.max(...datas);
+            var minData = Math.min(...datas);
+
+            // Question 1 : Marges et hauteur/largeur effective
+            var margin = {top: 40, right: 40, bottom: 40, left: 20};
+            var width = 250 - margin.left - margin.right;
+            var	height = 500 - margin.top - margin.bottom;
+
+            // Question 2 : Création du canvas
+            var canvas = d3.select("body").append("svg")
+										.attr("width", width + margin.left + margin.right) // Ici on utilise la largeur et la hauteur du canvas et pas l'effective
+										.attr("height", height + margin.top + margin.bottom)
+										.append("g")
+										.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Question 3 : Création de la fonction fonction échelle
+            var heightScale = d3.scaleLinear()
+            						.domain([minData, maxData])
+            						.range([100,height]);
+
+            // Question 3 : Création du barChart
+            var bars = canvas.selectAll("rect")
+							.data(datas)
+							.enter()
+							.append("rect")
+							.attr("height", function(d) {
+							return heightScale(d);
+							})
+							.attr("width", 20)
+							.attr("x", function(d, i) {
+							return 25 + i * 25;
+							})
+							.attr("y", function(d) {
+							return heightScale(maxData) - heightScale(d);
+							})
+							.attr("fill", "blue");
+
+            // Question 4 : Création d'une légende au-dessus du graphe
+            var textSur = canvas.append("text")
+								.text("Notes sur 100")
+								.style("font-weight", "bold")
+								.attr("x", 50) // Recentrage manuel
+								.attr("y", -15);
+
+            // Question 5 : Création d'une légende en-dessous du graphe
+            var textSous = canvas.append("text")
+								.text("Notes sur 100 (sous le graphe)")
+								.style("font-weight", "bold")
+								.attr("transform", "translate(0,"+height+")") // le bas du texte coincide avec le bas des rectangles
+								.attr("y", 20) // Recentrage manuel
+								.attr("x", -5);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de cet exercice est de charger puis de manipuler un fichier de données externes JSON.</p>
+            <p> Le format JSON est expliqué à <a href="https://fr.wikipedia.org/wiki/JavaScript_Object_Notation"> cette page</a>,
+                mais il suffit de retenir qu'il s'agit d'une représentation textuelle d'objets javaScript.
+            <p> Le fichier JSON utilisé dans cet exercice est disponible à <a href="./Exercice 2 Datas.json"> cette adresse</a>.
+                Il contient le nom, le prénom et l'âge de mort de quelques compositeurs célèbres.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Charger le fichier JSON avec d3 </li>
+                <li> Réaliser un bar chart représentant l'âge des compositeurs du JSON à leur mort </li>
+            </ol>
+        </div>
+        <script>
+            var margin = {top: 20, right: 30, bottom: 40, left: 40},
+            width = 400 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+                     var canvas = d3.select("body")
+                     				.append("svg")
+                     				.attr("width",width + margin.left + margin.right)
+                     				.attr("height",height + margin.top + margin.bottom)
+            				.attr("transform", "translate(" + margin.left + "," + margin.top+")");
+
+                // TODO Charger le fichier JSON et créer un bar chart représentant l'âge de mort des compositeurs du fichier
+        </script>
+    </body>
+</html>

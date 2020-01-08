@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exercice 1 </title>
+	<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+	<style>
+		svg  {border-style: solid;
+			  border-color: blue;}
+	</style>
+</head>
+
+<body>
+
+<div class="énoncé">
+	<p> Le but de cet exercice est de commencer à manipuler les transitions sur un exemple simple</p>
+	<p> Il vous est demandé de réaliser le trajet suivant : </p>
+	<ol>
+		<li> Après une seconde d'attente, faire traverser en 4 secondes le cercle en diagonale jusqu'en bas à droite du canvas</li>
+		<li> Puis le faire remonter verticalement en 3 secondes </li>
+		<li> Puis le faire revenir horizontalement à son point de départ en 2 secondes </li>
+	</ol>
+	<p> Remarque : la vitesse de déplacement du cercle doit être constante pour chaque transition </p>
+</div>
+	<script>
+
+	var canvas = d3.select("body")
+					.append("svg")
+					.attr("width",500)
+					.attr("height",500);
+
+	var circle = canvas.append("circle")
+						.attr("cx", 50)
+						.attr("cy",50)
+						.attr("r",25);
+
+	// TODO faire les transitions décrites dans l'énoncé
+
+	</script>
+</body>
+
+</html>

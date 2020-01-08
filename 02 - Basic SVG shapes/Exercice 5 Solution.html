@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 5 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de se familiariser avec plusieurs formes vectorielles simples et de les dessiners sur un canva </p>
+            <p> Dans ce cinquième exercice nous allons présenter une autre forme : l'ellipse.
+                Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Créer une ellipse verte dont le centre est celui du canvas et dont les bords coincident avec les bords du canvas   </li>
+                <li> Créer un cercle de même centre que l'ellipse et de rayon le rayon verticale de l'ellipse  </li>
+            </ol>
+        </div>
+        <script>
+            // Création d'un canvas svg de largeur 350 et de hauteur 350
+            var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", 300)
+            .attr("height", 200);
+
+			// Question 1
+            canvas.append("ellipse")
+					.attr("cx",150)
+					.attr("cy",100)
+					.attr("rx",150)
+					.attr("ry",100)
+					.attr("fill","green");
+
+			// Question 2
+			canvas.append("circle")
+					.attr("cx",150)
+					.attr("cy",100)
+					.attr("r",100)
+					.attr("fill","orange");
+        </script>
+    </body>
+</html>

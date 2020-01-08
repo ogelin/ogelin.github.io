@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est d'introduire les paths de SVG permettant de réaliser des figures plus complexes que des cercles ou des carrés. </p>
+            <p> Dans ce deuxième exercice nous allons utiliser les paths pour représenter en perspective cavalière un cube. Les sommets du cube sont déjà sur le canvas et le sommet gris est "derrière" les autres. </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Créer plusieurs paths permettant de dessiner en perspective cavalière un cube </li>
+				<li> Dessiner le cube en perspective cavalière </li>
+				<li> Les arètes visibles seront représentées par des traits pleins et les arètes non visibles par des tirets </li>
+            </ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",500)
+            				.attr("height",500);
+
+            var group = canvas.append("g").attr("transform", "translate(75,175)"); // Nouvelle origine pour dessiner les figures géométriques
+
+			var dist = 100;
+
+			// On va nommer les points du  cube pour plus de facilité
+			var A = {x:0,y:0},
+				B = {x:250,y:0},
+				C = {x:250,y:250},
+				D = {x:0,y:250},
+				E = {x:0 + dist,y:0 - dist},
+				F = {x:250 + dist,y:0 - dist},
+				G = {x:250 + dist,y:250 - dist},
+				H = {x:0 + dist,y:250 - dist};
+
+            var cube3D = [ A,B,C,D,E,F,G, H];
+
+			group.selectAll("circle")
+				.data(cube3D)
+				.enter()
+				.append("circle")
+				.attr("cx", function(d){return d.x})
+				.attr("cy", function(d){return d.y})
+				.attr("r", 5);
+
+			group.selectAll("text")
+				.data(cube3D)
+				.enter()
+				.append("text")
+				.attr("x", function(d){return d.x - 20})
+				.attr("y", function(d){return d.y - 10})
+				.text(function(d,i) {return String.fromCharCode(65 + i)});
+
+			d3.select(group.selectAll("circle")[0][7]).attr("fill", "grey");
+
+			// TODO : Faire les paths correspondant pour dessiner un cube en perspective cavalière
+
+        </script>
+    </body>
+</html>

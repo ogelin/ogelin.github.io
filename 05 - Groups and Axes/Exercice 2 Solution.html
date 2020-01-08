@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+				border-style: solid;
+				border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les axes afin de permettre d'expliquer les graphiques. Nous prendrons le graphe de <a href="../04 - Scales/Exercice 1.html">l'exercice 1 du chapitre 4</a><br> que nous allons améliorer.</p>
+            <p> Ce deuxième exercice est la suite directe du premier. Après avoir introduit les marges et les titres nous allons créer un axe vertical. Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Créer un axe vertical allant de 0 à 100 avec d3 </li>
+                <li> Spécifier un pas de 20 pour l'axe (l'axe affiche des valeurs de 20 en 20) </li>
+                <li> L'axe doit être affiché <b> à droite </b> du graphique </li>
+            </ol>
+            <p> Remarque : la fonction <b>.attr("transform", "translate(x,y)")</b> sera utile pour placer correctement l'axe. </p>
+        </div>
+        <script>
+            // CODE DE L'EXERCICE 1
+            var datas = [20, 50, 80, 40, 50, 100];
+
+            var maxData = Math.max(...datas);
+            var minData = Math.min(...datas);
+
+            var margin = {top: 40, right: 40, bottom: 40, left: 20};
+            var width = 250 - margin.left - margin.right;
+            var	height = 500 - margin.top - margin.bottom;
+
+            var canvas = d3.select("body").append("svg")
+										.attr("width", width + margin.left + margin.right)
+										.attr("height", height + margin.top + margin.bottom)
+										.append("g")
+										.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var heightScale = d3.scaleLinear()
+            						.domain([minData, maxData])
+            						.range([100,height]);
+
+            var bars = canvas.selectAll("rect")
+							.data(datas)
+							.enter()
+							.append("rect")
+							.attr("height", function(d) {
+							return heightScale(d);
+							})
+							.attr("width", 20)
+							.attr("x", function(d, i) {
+							return 25 + i * 25;
+							})
+							.attr("y", function(d) {
+							return heightScale(maxData) - heightScale(d);
+							})
+							.attr("fill", "blue");
+
+            var textSur = canvas.append("text")
+								.text("Notes sur 100")
+								.style("font-weight", "bold")
+								.attr("x", 50)
+								.attr("y", -15);
+
+            var textSous = canvas.append("text")
+								.text("Notes sur 100 (sous le graphe)")
+								.style("font-weight", "bold")
+								.attr("transform", "translate(0,"+height+")")
+								.attr("y", 20)
+								.attr("x", -5);
+
+            // FIN DU CODE DE L'EXERCICE 1
+
+            // Question 1
+            var vAxisScale = d3.scaleLinear()
+									.domain([0, maxData])
+									.range([height,0]);
+
+            // Question 2
+            var vAxis = d3.axisRight(vAxisScale)
+							.ticks(5); // 100/20 = 5 graduations
+
+            // Question 3
+            canvas.append("g")
+            .call(vAxis) // Affichage de l'axe sur le graphe
+            .attr("transform", "translate("+width+",0)"); // On translate l'axe à droite du graphe. Avec nos marges cette étape est très simple
+        </script>
+    </body>
+</html>

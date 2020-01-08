@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les cartes dans d3 ainsi que leur format de données, le GeoJSON. </p>
+            <p> GeoJSON est un format ouvert d'encodage d'ensemble de données géospatiales simples utilisant la norme JSON (JavaScript Object Notation). Il permet de décrire des données de type point, ligne, chaîne de caractères, polygone, ainsi que des ensembles et sous-ensembles de ces types de données et d'y ajouter des attributs d'information qui ne sont pas spatiale.  </p>
+            <p> Le fichier GeoJSON joint contient les coordonnées de chacune des provinces du Canada avec entre autres leur nom et le pourcentage de personne pouvant soutenir une conversation en français ( <a href = "https://www12.statcan.gc.ca/census-recensement/2011/as-sa/98-314-x/98-314-x2011003_1-fra.cfm"> source </a> ). Le but de cet exercice en deux parties est de représenter cette donnée sur une carte du Canada.
+                 Le fichier se trouve à <a href = "./canada.geojson"> cette adresse</a>.
+				<br> Dans ce deuxième exercice, nous allons nous intéresser à l'affichage sur la carte du Canada des données de chaque province concernant leur capacité à soutenir une conversation en français.
+				Une légende indiquant l'intensité de couleur en fonction du pourcentage de personnes par province pouvant soutenir une conversation en français est déjà fournie.
+				Cet exercice est la suite directe de l'exercice 1. Il est donc recommandé de l'avoir fait avant.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Réaliser l'exercice 1. </li>
+                <li> Colorier en intensité de rouge chaque province en fonction de leur capacité à soutenir une conversation en français. </li>
+				<li> Écrire le nom de chaque province et centrer ce nom sur chaque province. </li>
+            </ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+                      				.append("svg")
+                      				.attr("width",1000)
+                      				.attr("height",900);
+
+			// -------------------------------------------------------- Code pour afficher la légende ----------------------------------------------------
+			var legend = canvas.append("g")
+								.attr("class","legend")
+								.attr("transform","translate(10,50)");
+
+			var gradient = canvas.append("defs")
+								.append("linearGradient")
+								.attr("id", "gradient")
+								.attr("x1", "0%")
+								.attr("x2", "100%")
+								.attr("spreadMethod", "pad");
+
+			gradient.append("stop")
+					.attr("offset", "0%")
+					.attr("stop-color", "white")
+					.attr("stop-opacity", 1);
+
+			gradient.append("stop")
+					.attr("offset", "100%")
+					.attr("stop-color", "red")
+					.attr("stop-opacity", 1);
+
+			legend.append("text").text("0%").attr("transform","translate(0,20)");
+
+			legend.append("rect")
+					.attr("width", 100)
+					.attr("height", 20)
+					.attr("transform","translate(25,5)")
+					.style("fill", "url(#gradient)");
+
+			legend.append("text")
+					.text("100%")
+					.attr("transform","translate(130,20)");
+
+			legend.append("text")
+					.text("Pourcentage de la population de chaque province pouvant soutenir une conversation en français");
+
+			// -------------------------------------------------------- Fin du code pour afficher la légende ----------------------------------------------------
+
+			// TODO : Faire les manipulations de l'énoncé
+
+         </script>
+    </body>
+</html>

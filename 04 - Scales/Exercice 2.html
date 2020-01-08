@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+            border-style: solid;
+            border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les échelles dans d3. En plus des échelles de distance vues dans l'exercice 1, on peut également utiliser des échelles de couleur. <br>
+                Ces échelles peuvent être utilisées pour représenter en couleur des valeurs comme des températures.
+                Dans cet exercice les données représentent la température prise à différents emplacement d'une plaque en métal carrée qui a été chauffée en son centre.
+                Les températures mesurées vont de 20°C en périphérie à 50°C au centre de la plaque.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Créer une échelle de couleur permettant de représenter en bleu les températures froides et en rouge les températures élevées </li>
+                <li> Utiliser cette échelle pour colorier les différents points mesurées avec la couleur adéquate </li>
+            </ol>
+        </div>
+        <script>
+			// Données à utiliser
+			var circles = [];
+			for (i = 0; i < 9; i++) {
+				for (j = 0; j < 9; j++) {
+					temp = {
+						x: i * 33 + 20,
+						y: j * 33 + 20,
+						value: 50 - (Math.abs(4 - i) + Math.abs(4 - j)) * 3
+					};
+					circles[i * 9 + j] = temp;
+				}
+			}
+
+			// Création d'un canvas
+			var canvas = d3.select("body")
+				.append("svg")
+				.attr("width", 300)
+				.attr("height", 300);
+
+			canvas.selectAll("circle")
+				.data(circles)
+				.enter()
+				.append("circle")
+				.attr("cx", function(d) {
+					return d.x
+				})
+				.attr("cy", function(d) {
+					return d.y
+				})
+				.attr("r", 10);
+
+				// TODO faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

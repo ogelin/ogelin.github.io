@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+            border-style: solid;
+            border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de comprendre les principes de visualisation à partir d'un tableau de données <br></p>
+            <p> Dans ce premier exercice, nous allons simplement utiliser le tableau de données suivant pour créer des disques : <b>[10, 20, 30, 40, 50]</b>. Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Afficher les cercles avec leur rayon respectif sur la diagonale haut-gauche/bas-droit
+                    Les centres des disques doivent être espacés de 100 pixels en hauteur et en largeur
+                </li>
+            </ol>
+        </div>
+        <script>
+            // Diametre des cercles à afficher
+            var diametreCercle = [10, 20, 30, 40, 50];
+
+            // Création d'un canvas svg
+            var canvas = d3.select("body")
+            	.append("svg")
+            	.attr("width", 500)
+            	.attr("height", 500);
+
+            // TODO : Faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exercice 2 </title>
+	<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+	<style>
+		svg  {border-style: solid;
+			  border-color: blue;}
+	</style>
+</head>
+
+<body>
+
+<div class="énoncé">
+	<p> Le but de cet exercice est d'utiliser les transitions pour réaliser un effet de zoom </p>
+	<p> Il vous est demandé de réaliser le trajet suivant : </p>
+	<ol>
+		<li> Faire avancer le cercle au centre du canvas en augmentant progressivement sa taille </li>
+		<li> Continuer à faire avancer le cercle en revenant à sa taille d'origine </li>
+	</ol>
+</div>
+	<script>
+
+	var canvas = d3.select("body")
+					.append("svg")
+					.attr("width",500)
+					.attr("height",500);
+
+	var circle = canvas.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 250)
+						.attr("r", 25);
+
+	// TODO faire les transitions décrites dans l'énoncé
+
+	</script>
+</body>
+
+</html>

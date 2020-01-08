@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 3 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: black;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de se familiariser avec plusieurs formes vectorielles simples et de les dessiners sur un canva </p>
+            <p> Ce troisème exercice reprend le deuxième mais en adaptant le canvas à l'écran de l'utilisateur. Dans tout cet exercice le terme "fenêtre"
+                se réfère à la taille de la fenêtre du navigateur de l'utilisateur. Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Créer un canvas de la taille de celle de la fenêtre (prendre 95% de la taille de la fenêtre pour prendre en compte les sliders) </li>
+                <li> Dessiner un disque bleu au centre du canvas de rayon : 1/5 du plus petit entre la largeur et la hauteur de la fenêtre </li>
+                <li> Dessiner un rectangle noir rempli en haut à gauche du canvas de hauteur 100 pixels
+                    et de largeur 50 pixels si la largeur de l'écran est plus petite que la hauteur
+                </li>
+                <li> Dessiner un carré rouge rempli de côté 50 pixels juste à droite du rectangle noir </li>
+                <li> Dessiner une ligne jaune traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+                    La ligne doit être au-dessus des autres dessins
+                </li>
+                <li> Dessiner une ligne verte traversant tout le canvas en diagonale (haut-gauche / bas-droite) d'épaisseur 5 pixels.
+                    La ligne doit être en-dessous des autres dessins
+                </li>
+            </ol>
+        </div>
+        <script>
+            // Taille de la fenêtre au chargement de la page
+            var largeurEcran = 400;
+            var hauteurEcran = 400;
+
+            var canvas = d3.select("body")
+            			   .append("svg")
+            			   .attr("width",largeurEcran)
+            			   .attr("height",hauteurEcran);
+
+            // TODO : faire les manipulations de l'énoncé
+			// ATTENTION : dans le code ci-dessus il faut remplacer la valeur "400" par la taille de la fenêtre de l'utilisateur
+
+        </script>
+    </body>
+</html>

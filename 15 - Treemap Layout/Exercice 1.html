@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {
+			border-style: solid;
+            border-color: blue;
+			}
+            a:visited {
+            fill:darkpurple;
+            }
+            a:hover, a:active {
+            text-decoration: underline;
+            fill:darkred;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter un autre type de layout : la carte à cases (<i> treemap </i> en anglais).
+                <br> On souhaite mettre en forme certains cours de Polytechnique et les grouper par génie (mathématique, informatique...).
+                De plus on souhait rajouter des hyperliens pour arriver directement sur le site de chaque cours.
+                <br> Toutes ces données se trouvent à <a href="./exercice1.json"> cette adresse </a>.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Mettre dans une variable treemap les données traitées par le layout (utiliser d3.hierarchy() et <b>d3.treemap()</b>). </li>
+                <li> Utiliser cette variable pour créer une cellule par cours. Une cellule correspond en svg à un rectangle. Les cellules ayant un génie commun doivent avoir la même couleur.
+                    <br> Si le layout a traité correctement les données, la position et la longueur/largeur de chaque cellule est définie dans les propriétés .x0, .y0, .x1 et .y1
+                </li>
+                <li> Ajouter le nom du cours de chaque cellule et le centrer et y associer un hyperlien qui redirige vers la description du cours sur le site de Polytechnique Montréal. Souligner l'hyperlien.
+                    Une URL est fournie dans le code.
+                    <br> <b>Remarque</b> : Il est plus simple de créer un hyperlien ayant comme nom celui du cours plutôt que d'associer un hyperlien à un text
+                </li>
+            </ol>
+        </div>
+        <script>
+
+            // Rajouter le nom du cours à la fin de cette URL pour accéder à sa description sur le site de Polytechnique
+            var url = "http://www.polymtl.ca/etudes/cours/details.php?sigle=";
+
+            var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var canvas = d3.select("body").append("svg")
+            				.attr("width",500)
+            				.attr("height",500)
+
+            d3.json("exercice1.json").then(function(data){
+
+					// TODO : Faire les manipulations de l'énoncé
+
+            });
+
+        </script>
+    </body>
+</html>

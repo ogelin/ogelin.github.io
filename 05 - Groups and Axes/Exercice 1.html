@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg {
+				border-style: solid;
+				border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les axes afin de permettre d'expliquer les graphiques. Nous prendrons le graphe de <a href="../04 - Scales/Exercice 1.html">l'exercice 1 du chapitre 4</a><br> que nous allons améliorer.</p>
+            <p> Dans ce premier exercice nous allons préparer le graphe en introduisant les marges afin de permettre de facilement créer des axes. Les marges sont des espaces dans le canvas qui permettent de décaler le graphe. On a donc un espace dans lequel on peut écrire du texte. <br>
+                Il vous est demandé de faire le travail suivant :
+            </p>
+            <ol>
+                <li> Créer la largeur et la hauteur effective du canvas (taille de la zone dans laquelle on veut dessiner (exemple : largeur effective = largeur du canvas - marge à gauche - marge à droite). <br>
+                     On prendra comme taille de canvas : 250 pixels en largeur et 500 en hauteur </li>
+				<li> Créer le canvas en utilisant les notations précédentes  </li>
+                <li> Recréer le graphe de l'exercice 1 du chapitre 4 en utilisant ces nouvelles notations </li>
+                <li> Ecrire le titre suivant en gras : "Notes sur 100". Le titre doit être au-dessus du graphe (dans la marge du haut) </li>
+                <li> Réecrire un titre semblable sous le graphe (dans la marge du bas) </li>
+            </ol>
+            <ul>
+                <b>Remarques :</b>
+                <li> Ressource pour les conventions sur les marges dans un svg : <a href = > https://gist.github.com/mbostock/3019563 </a></li>
+                <li> Pour les questions 5 et 6, il faudra légèrement modifier la position du texte pour le recentrer (.attr("x",...) et .attr("y",...)
+                <li> Pour la question 6 la fonction .attr("transform", "translate(<b>x,y</b>)") de d3 sera utile.</li>
+            </ul>
+        </div>
+        <script>
+            // Données à utiliser
+            var datas = [20, 50, 80, 40, 50, 100];
+
+            // Aide
+            var maxData = Math.max(...datas);
+            var minData = Math.min(...datas);
+
+            // Question 1 : Marges et hauteur/largeur effective
+            var margin = {top: 40, right: 40, bottom: 40, left: 20};
+            var width = 250 - 0; // À compléter
+            var	height = 500 - 0; // À compléter
+
+            //TODO : faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>

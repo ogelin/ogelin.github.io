@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+			svg {
+				border-style: solid;
+				border-color: black;
+			}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les échelles dans d3. En pratique notre canvas à une taille fixe et il peut être très difficile de garder une échelle fixe pour représenter des données.
+                En effet, on ne veut pas que notre canvas prenne des proportions démesurées pour pouvoir afficher de nouvelles valeurs qui seraient bien plus grandes que les précédentes <br>
+            </p>
+            <p> Ainsi il est utile d'utiliser des échelles pour limiter la taille des valeurs à afficher. Nous allons ici utiliser une échelle linéaire simple. <br>
+                Soit les données suivantes : [20,50,80,40,50,100]. Il vous est demandé de le travail suivant :
+            </p>
+            <ol>
+                <li> Créer une échelle linéaire pour que toutes les valeurs du tableau soient dans l'intervalle [100,500]  </li>
+                <li> Utiliser cette échelle pour créer un barchart avec les données du tableau. La largeur des barres est de 20 px, la hauteur est proportionnelle aux données
+               mais la valeur maximale doit faire la hauteur totale du canvas. La couleur est au choix </li>
+            </ol>
+        </div>
+        <script>
+            // Données à utiliser
+            var datas = [20, 50, 80, 40, 50, 100];
+
+            // Calculs de variables et fonction utiles
+            var nombreDonnees = datas.length;
+            var maxData = Math.max(...datas);
+            var minData = Math.min(...datas);
+
+			// Création d'un canvas
+            var canvas = d3.select("body")
+							.append("svg")
+							.attr("width", 300)
+							.attr("height", 500);
+
+            // Question 1
+            var heightScale = d3.scaleLinear()
+            						.domain([minData, maxData])
+            						.range([100,500]);
+
+            // Question 2
+            var bars = canvas.selectAll("rect")
+							.data(datas)
+							.enter()
+							.append("rect")
+							.attr("height", function(d) {
+							return heightScale(d);
+							})
+							.attr("width", 20)
+							.attr("x", function(d, i) {
+							return 2 + i * 25;
+							})
+							.attr("y", function(d) {
+							return heightScale(maxData) - heightScale(d);
+							})
+							.attr("fill", "blue");
+        </script>
+    </body>
+</html>

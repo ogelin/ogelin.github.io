@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+            .axis path,
+            .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter et manipuler les histogrammes (bar chart) dans D3.js. <br> Dans le cas où les données n'ont pas à êtres traitées et peuvent être affichées directement,
+                il n'est pas nécessaire de passer par le layout. Ce sera le cas dans cet exercice où l'on souhaite afficher les ventes mensuelles d'une société pour l'année 2015.
+				<br> Les données se trouvent à <a href = "./exercice1.csv"> cette adresse</a>.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>band</b> pour l'axe horizontal. Utiliser <b>.range</b> pour obtenir simplement l'emplacement des mois sur l'axe.
+                    <br> Attention le domaine de la fonction verticale doit être obtenu à partir des données et non être inscrit en dur !
+                </li>
+                <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
+                <li> Ajouter les colonnes de l'histogramme.</li>
+                <li> Ajouter un titre de taille 20 pixels, centré en haut de l'histogramme et en caractère gras. </li>
+            </ol>
+        </div>
+        <script>
+            var margin = {
+                top: 50,
+                right: 30,
+                bottom: 50,
+                left: 70
+            };
+
+            var width = 1000 - margin.left - margin.right,
+                height = 700 - margin.top - margin.bottom;
+
+            var canvas = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.csv("exercice2.csv").then(function(data) {
+
+				// Permet de convertir en nombre JavaScript les strings représentant les ventes dans data
+                function conversion(vente) {
+                    return parseFloat(vente.replace(/ /g, ''));
+                };
+
+                // TODO : Faire les manipulations de l'énoncé
+
+            })
+        </script>
+    </body>
+</html>

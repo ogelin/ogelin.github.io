@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter d'autres layout pour afficher des données. Dans cet exercice on utilisera un fichier ayant une structure similaire à celle de l'exercice 1.
+				Le fichier se trouve à <a href="./famille.json"> cette adresse </a> et contient les notions clés du cours INF8808.</p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Charger le fichier JSON contenant le numéro du cours et ses notions clés </li>
+				<li> Mettre dans une variable <i> node </i> les données du fichier traitées avec le layout </li>
+				<li> Afficher les données sous forme de cercle où chaque cercle représente une notion du cours.
+					 Si le layout est bien utilisé les positions des cercles sont disponibles dans les attributs .x et .y des données des noeuds <br>
+					 <b> ATTENTION : </b> on ne veut <b> pas de cercle </b> pour le titre du cours </li>
+				<li> Ajouter le nom des notions. Le numéro du cours doit être en haut et les notions doivent êtres centrées dans leur cercle. </li>
+				<li> Afficher en gras les notions suivantes : <u> Programmation avec une librairie </u>, <u> Couleur, perception et cognition </u>, <u> Principes de design graphique </u>, <u> Données multidimensionnelles </u> </li>
+			</ol>
+        </div>
+        <script>
+
+			var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",1000)
+            				.attr("height",1000)
+							.append("g")
+							.attr("transform", "translate(50,50)");
+
+			var pack = d3.pack().size([800,800]).padding(10);
+
+			// TODO : Faire les manipulations de l'énoncé
+        </script>
+    </body>
+</html>

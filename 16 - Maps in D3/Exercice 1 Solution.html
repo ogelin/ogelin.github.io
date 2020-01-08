@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les cartes dans d3 ainsi que leur format de données, le GeoJSON. </p>
+            <p> GeoJSON est un format ouvert d'encodage d'ensemble de données géospatiales simples utilisant la norme JSON (JavaScript Object Notation). Il permet de décrire des données de type point, ligne, chaîne de caractères, polygone, ainsi que des ensembles et sous-ensembles de ces types de données et d'y ajouter des attributs d'information qui ne sont pas spatiale.  </p>
+            <p> Le fichier GeoJSON joint contient les coordonnées de chacune des provinces du Canada avec entre autres leur nom et le pourcentage de personne pouvant soutenir une conversation en français ( <a href = "https://www12.statcan.gc.ca/census-recensement/2011/as-sa/98-314-x/98-314-x2011003_1-fra.cfm"> source </a> ). Le but de cet exercice en deux parties est de représenter cette donnée sur une carte du Canada.
+                Le fichier se trouve à <a href = "./canada.geojson"> cette adresse</a>.
+				<br> Dans ce premier exercice nous allons nous intéresser à l'affichage de la carte du Canada.
+            </p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Ouvrir le fichier GeoJSON. </li>
+                <li> Afficher la carte en utilisant une projection de mercator. </li>
+                <li> Zoomer suffisamment pour que la taille de la carte corresponde à la taille du canvas et centrer la carte. </li>
+            </ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+                      				.append("svg")
+                      				.attr("width",1000)
+                      				.attr("height",900);
+            // Question 1
+            d3.json("canada.geojson").then(function(data){
+
+            var data = data;
+            var group = canvas.append("g").selectAll("g")
+            						.data(data.features)
+            						.enter()
+            						.append("g");
+            // Question 3 (et un peu 2)
+            var projection = d3.geoMercator()
+									.rotate([100, -45])
+									.center([5, 20])
+									.scale(1000)
+									.translate([500,400]);
+
+			// Question 2
+            var path = d3.geoPath().projection(projection);
+
+            var areas = group.append("path")
+            					.attr("d",path)
+            					.attr("class","area")
+								.attr("stroke-width",1)
+								.attr("stroke", "black")
+								.attr("fill", "white");
+
+            	});
+        </script>
+    </body>
+</html>

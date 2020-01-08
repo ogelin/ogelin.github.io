@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 1 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter et manipuler les histogrammes (bar chart) dans D3.js. Dans cet exercice vous avez un fichier contenant 300 nombres représentant les âges de 300 personnes (entre 0 et 100 ans).
+				Le but de l'exercice est de réaliser un histogramme permettant de voir les classes d'âges par décennie de la population choisie, c'est-à-dire combien de personne ont entre 0 et 10 ans, entre 11 et 20 ans etc.
+				Le fichier se situe à <a href = "./exercice1.csv"> cette adresse</a>.</p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Charger les données dans le layout et indiquer 10 classes. </li>
+                <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
+                <li> Ajouter les "bar" de l'histogramme. On peut voir ces "bar" comme des <b>rectangles</b>. </li>
+                <li> Ajouter un texte dans chaque rectangle indiquant la population de chaque classe. Le texte doit être situé dans le bord supérieur du rectangle. </li>
+            </ol>
+        </div>
+        <script>
+            var margin = {
+                top: 20,
+                right: 40,
+                bottom: 20,
+                left: 10
+            };
+
+            var width = 800 - margin.left - margin.right,
+                height = 800 - margin.top - margin.bottom;
+
+            var canvas = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.csv("exercice1.csv").then(function(data) {
+
+				// On convertit les données en entier
+                var map = data.map(function(d) {
+                    return parseInt(d.Age);
+                });
+
+				// TODO : Faire les manipulations de l'énoncé
+
+            })
+        </script>
+    </body>
+</html>

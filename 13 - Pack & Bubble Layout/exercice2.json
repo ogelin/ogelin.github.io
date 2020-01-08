@@ -1,0 +1,15 @@
+{
+	"name": "INF8808",
+	"value": 200,
+	"children": [
+		{"name": "Principes de design graphique", "value": 200},
+		{"name": "Données visuelles", "value":100},
+		{"name": "Interaction et animation", "value":150},
+		{"name": "Arbres et réseaux", "value": 150},
+		{"name": "Géovisualisation", "value":150},
+		{"name": "Données multimédias", "value":130},
+		{"name": "Données multidimensionnelles", "value": 200},
+		{"name": "Couleur, perception et cognition", "value":300},
+		{"name": "Programmation avec une librairie", "value":400}
+		]
+}

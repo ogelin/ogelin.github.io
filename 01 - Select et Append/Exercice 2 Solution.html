@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 2 Solution </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but des exercices du premier chapitre est de se familiariser à la manipulation des éléments du DOM avec la librairie d3.js</p>
+            <p> L'exercice présent possède 3 balises &lt;p&gt;. Le but est de rajouter au bon endroit deux autres balises &lt;p&gt;.</p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Rajouter une balise &lt;p&gt contenant le texte "un cinquième paragraphe" à la fin des balises &lt;p&gt </li>
+                <li> Rajouter une balise &lt;p&gt contenant le texte "un troisième paragraphe" en troisième position </li>
+            </ol>
+        </div>
+        <hr>
+        <div class="para">
+            <p> Un premier paragraphe </p>
+            <p> Un deuxième paragraphe </p>
+            <p> Un quatrième paragraphe </p>
+        </div>
+        <script>
+            // Rajouter une balise <p> contenant le texte "un cinquième paragraphe" à la fin des balises <p>
+            d3.select(".para").append("p").text("Un cinquième paragraphe");
+            // Rajouter une balise <p> contenant le texte "un troisième paragraphe" en troisième position
+            d3.select(".para").insert("p", ":nth-child(2)").text("Un troisième paragraphe");
+        </script>
+    </body>
+</html>

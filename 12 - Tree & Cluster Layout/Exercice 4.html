@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Exercice 4 </title>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <style>
+            svg  {border-style: solid;
+            border-color: blue;}
+        </style>
+    </head>
+    <body>
+        <div class="énoncé">
+            <p> Le but de ce chapitre est de présenter les tree layouts (diagrammes en arbre) permettant de représenter des données en arborescence comme dans un arbre généalogique. </p>
+            <p> En pratique, on ne vas pas créer un lien pour chaque liaison à faire. On possède un fichier (<a href="./famille.json"> lien </a>) avec déjà les liens à l'intérieur et nous allons nous servir des outils de d3 pour créer un arbre en toute facilité. </p>
+			<p> Ce quatrième exercice propose une petite variante d'affichage de l'exercice 3. On suppose désormais que Marie et Pierre sont de la même génération que Sarah et Jacque (et non plus Paul). Ainsi on aimerait les aligner non pas avec Paul mais avec Sarah <p>
+            <p> Il vous est demandé de faire le travail suivant : </p>
+            <ol>
+                <li> Reprendre l'exercice 2 ou l'exercice 3 </li>
+				<li> Modifier le code afin que les points soient alignés en commençant par l'extermité de l'arbre et non son origine </li>
+			</ol>
+        </div>
+        <script>
+            var canvas = d3.select("body")
+            				.append("svg")
+            				.attr("width",500)
+            				.attr("height",500)
+							.append("g")
+							.attr("transform", "translate(50,50)");
+
+			var tree = d3.tree().size([400,400]);
+
+			// TODO : Faire les manipulations de l'énoncé
+
+        </script>
+    </body>
+</html>
