@@ -6,7 +6,7 @@ published: 2026-08-22
 
 I am excited to have joined [RevenueCat's Shipaton](https://www.shipaton.com/) this year! I'm planning to use it as an opportunity to build an end-to-end mobile application with LLM and MCP integration. The product itself is private for now, but I thought I'd start by sharing some initial thoughts about its architecture. I'm planning to share more as things develop further.
 
-## Where does the LLM fit?
+## Where does the LLM fit in?
 
 The application is based on the familiar, well-established three-layer architecture:
 
