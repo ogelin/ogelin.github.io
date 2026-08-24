@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+<BaseLayout>
+  <section class="shell hero">
+    <h1>Olivia Gélinas</h1>
+    <p class="role">Software Engineer · Montréal</p>
+  </section>
+  <section class="shell section">
+    <div class="section-head"><h2>Recent writing</h2><a href={`${base}writing/`}>All notes →</a></div>
+    <ul class="list">{posts.slice(0, 3).map((post) => <li><time datetime={post.data.published.toISOString()}>{post.data.published.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', timeZone: 'UTC' })}</time><div><h2><a href={`${base}writing/${post.id}/`}>{post.data.title}</a></h2><p>{post.data.description}</p></div></li>)}</ul>
+  </section>
+</BaseLayout>

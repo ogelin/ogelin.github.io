@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title, description = 'Software engineering and writing by Olivia Gélinas.' } = Astro.props;
+const pageTitle = title ? `${title} — Olivia Gélinas` : 'Olivia Gélinas — Software Engineer';
+const path = Astro.url.pathname;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const nav = [[`${base}writing/`, 'Writing']];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header>
+      <nav class="shell nav" aria-label="Primary navigation">
+        <div class="identity">
+          <a class="brand" href={base}>Olivia Gélinas</a>
+          <span class="profession">, Software Engineer</span>
+        </div>
+        <div class="nav-links">
+          {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+          <a href="https://github.com/ogelin" rel="me">GitHub</a>
+          <a href="https://www.linkedin.com/in/olivia-gelinas/" rel="me">LinkedIn</a>
+        </div>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer><div class="shell footer-inner"><span>© {new Date().getFullYear()} Olivia Gélinas</span><span>Built with Astro. No tracking.</span></div></footer>
+  </body>
+</html>

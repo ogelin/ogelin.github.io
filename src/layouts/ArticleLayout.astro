@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { title, description, published } = Astro.props;
+const date = new Date(published);
+---
+<BaseLayout title={title} description={description}>
+  <article class="prose">
+    <header>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="meta"><time datetime={date.toISOString()}>{date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time></p>
+    </header>
+    <slot />
+  </article>
+</BaseLayout>
