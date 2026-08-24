@@ -26,11 +26,11 @@ const nav = [[`${base}writing/`, 'Writing']];
         <div class="nav-links">
           {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
           <a href="https://github.com/ogelin" rel="me">GitHub</a>
-          <a href="https://www.linkedin.com/in/olivia-gelinas/" rel="me">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/olivia-g%C3%A9linas/" rel="me">LinkedIn</a>
         </div>
       </nav>
     </header>
     <main><slot /></main>
-    <footer><div class="shell footer-inner"><span>© {new Date().getFullYear()} Olivia Gélinas</span><span>Built with Astro. No tracking.</span></div></footer>
+    <footer><div class="shell footer-inner"><span>© {new Date().getFullYear()} Olivia Gélinas</span></div></footer>
   </body>
 </html>

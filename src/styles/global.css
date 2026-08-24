@@ -56,7 +56,7 @@ footer { padding: 1.25rem 0; border-top: 1px solid var(--line); color: var(--mut
 .prose pre { margin: 1.75rem 0; padding: 1rem; border: 1px solid #30363d; overflow-x: auto; font-size: .82rem; line-height: 1.6; }
 .prose :not(pre) > code { padding: .08em .25em; border: 1px solid var(--soft-line); background: var(--wash); font-size: .88em; }
 .diagram { margin: 1.75rem 0; padding: 1rem; border: 1px solid var(--line); background: var(--wash); overflow-x: auto; font: .8rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre; }
-.architecture-figure { width: min(68rem, calc(100vw - 2rem)); margin: 2rem 0 2rem 50%; transform: translateX(-50%); }
+.architecture-figure { width: 100%; margin: 2rem 0; }
 .architecture-figure a { display: block; border: 1px solid var(--soft-line); background: var(--wash); }
 .architecture-figure img { display: block; width: 100%; height: auto; }
 .architecture-figure figcaption { margin-top: .45rem; color: var(--muted); font: .76rem/1.5 Arial, Helvetica, sans-serif; }
