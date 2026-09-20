@@ -229,7 +229,12 @@ const comparisonId = `comparison-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-
     });
 
     carousel.addEventListener('pointerdown', (event) => {
-      if (!event.isPrimary || event.button !== 0 || carousel.scrollWidth <= carousel.clientWidth + 2) return;
+      if (
+        !event.isPrimary
+        || event.pointerType === 'touch'
+        || event.button !== 0
+        || carousel.scrollWidth <= carousel.clientWidth + 2
+      ) return;
       dragPointer = event.pointerId;
       dragStartX = event.clientX;
       dragStartScroll = carousel.scrollLeft;
@@ -590,7 +595,7 @@ const comparisonId = `comparison-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
       cursor: grab;
-      touch-action: pan-y pinch-zoom;
+      touch-action: pan-x pan-y pinch-zoom;
       -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
     }
