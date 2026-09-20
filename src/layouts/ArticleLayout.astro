@@ -1,9 +1,9 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const { title, description, published } = Astro.props;
+const { title, description, published, socialImage } = Astro.props;
 const date = new Date(published);
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} socialImage={socialImage} type="article">
   <article class="prose">
     <header>
       <h1>{title}</h1>

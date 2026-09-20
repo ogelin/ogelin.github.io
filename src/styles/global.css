@@ -61,6 +61,9 @@ footer { padding: 1.25rem 0; border-top: 1px solid var(--line); color: var(--mut
 .architecture-figure a { display: block; border: 1px solid var(--soft-line); background: var(--wash); }
 .architecture-figure img { display: block; width: 100%; height: auto; }
 .architecture-figure figcaption { margin-top: .45rem; color: var(--muted); font: .76rem/1.5 Arial, Helvetica, sans-serif; }
+.disclosure-panel { margin: 1.75rem 0 2rem; padding: 1rem 1.1rem; border: 1px solid #b8c5bd; border-left: 4px solid #5d7b6d; background: var(--wash); font: .9rem/1.55 Arial, Helvetica, sans-serif; }
+.disclosure-panel strong { display: block; margin-bottom: .25rem; color: var(--ink); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+.disclosure-panel p { margin: 0; color: var(--muted); }
 @media (min-width: 801px) {
   body { background: var(--outer); }
   main { width: min(100%, 50rem); margin-inline: auto; background: var(--paper); }

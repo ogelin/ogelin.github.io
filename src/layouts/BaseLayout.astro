@@ -1,11 +1,13 @@
 ---
 import '../styles/global.css';
-interface Props { title?: string; description?: string; }
-const { title, description = 'Software engineering and writing by Olivia Gélinas.' } = Astro.props;
+interface Props { title?: string; description?: string; socialImage?: string; type?: 'website' | 'article'; }
+const { title, description = 'Software engineering and writing by Olivia Gélinas.', socialImage, type = 'website' } = Astro.props;
 const pageTitle = title ? `${title} — Olivia Gélinas` : 'Olivia Gélinas — Software Engineer';
 const path = Astro.url.pathname;
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 const nav = [[`${base}writing/`, 'Writing']];
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImageUrl = socialImage ? new URL(`${base}${socialImage.replace(/^\//, '')}`, Astro.site ?? Astro.url.origin) : undefined;
 ---
 <!doctype html>
 <html lang="en">
@@ -14,6 +16,16 @@ const nav = [[`${base}writing/`, 'Writing']];
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+    <meta name="twitter:card" content={socialImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
     <title>{pageTitle}</title>
   </head>
   <body>

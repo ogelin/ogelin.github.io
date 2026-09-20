@@ -1,0 +1,111 @@
+---
+title: Adapting a Rich Desktop Dashboard for Mobile Field Use
+description: One interconnected desktop screen becomes a set of focused mobile views, with clear navigation and shared context for people working in the field.
+published: 2026-09-18
+draft: false
+socialImage: social/adapting-an-industrial-dashboard-for-field-use.png
+---
+
+import ScreenshotComparison from '../../components/case-study/ScreenshotComparison.astro';
+import UserJourney from '../../components/case-study/UserJourney.astro';
+
+As I’m wrapping up my work at Teledyne, I’ve been thinking about the challenges of adapting a legacy dashboard for reviewing instrument readings on a mobile device in the field.
+
+The desktop product had two levels: a dashboard of compact widgets, then a detailed page with a richer, interactive version of each widget. For instance, a detailed page could include filters, results, a selected item for context, time-series instrument readings, a chart, and a map.
+
+My goal was to drive forward a newer, mobile-friendly version intended for people closer to the work, sometimes checking a reading while handling equipment. It needed to be straightforward to use in the field while preserving the functionality, data, and familiar workflows that existing users relied on.
+
+<aside className="disclosure-panel">
+  <strong>About the images</strong>
+  <p>These screens preserve the structure of the work, but, for privacy reasons, the public versions use fictional commercial real estate data. This includes invented branding, colours, labels, dates, identifiers, measurement types, readings, and plotted data.</p>
+</aside>
+
+<ScreenshotComparison
+  featured
+  eyebrow="Session Data"
+  title="Dedicated mobile views made the chart easier to read without losing context"
+  desktopSrc="images/field-dashboard/chart-desktop-matched.png"
+  desktopWidth={1506}
+  desktopAlt="An anonymized desktop property-data workspace with filters, results, a summary, readings, and three series overlaid in one plotting area"
+  phoneSrc="images/field-dashboard/session-data-v4.png"
+  phoneAlt="An anonymized final mobile design using fictional property data, with three stacked line charts linked to a selected reading in a five-column table"
+  phoneSrcSecondary="images/field-dashboard/session-map-v4.png"
+  phoneAltSecondary="An anonymized mobile Neighborhood Map with property markers above the same five-column readings table used in the chart view"
+  caption="The desktop retains the familiar overlaid plot. The mobile chart and map use focused views while sharing the same selected reading below."
+/>
+
+I took the occasion to rework the data visualization, not only to make it more mobile-friendly, but also to make it more readable by avoiding several y-axes in one plotting area. The desktop keeps the initial design because users were familiar with the legacy version. The newer mobile design splits the series into stacked charts with a shared x-axis and separate y-axes.
+
+The mobile design also reuses the table headers as the legend to make better use of the reduced space. Selecting a row aligns the same timestamp across all three series. Switching to the Neighborhood Map changes the upper view but keeps the selected row and table in place. This gives the trends, readings, and Neighborhood Map their own focused views while preserving context.
+
+## Separating the layers inside a widget
+
+On desktop, Session Data behaved like a dashboard. The filter form, result table, selected-session summary, readings, chart, and map could all be visible at once, and their selections formed the context that led to interdependent updates across the sections.
+
+On mobile, the same material was divided into a multi-step flow with context:
+
+<UserJourney
+  title="From search to an individual reading"
+  steps={[
+    'Set filters',
+    'Review list of results',
+    'Choose an item',
+    'See its summary',
+    'Click for details (map, charts, etc.)',
+  ]}
+  handwritingSrc="images/field-dashboard/user-journey-handwriting.png"
+  handwritingWidth={1640}
+  handwritingHeight={2360}
+  handwritingCrops={[
+    { x: 455, y: 838, width: 470, height: 125 },
+    { x: 450, y: 1004, width: 575, height: 185 },
+    { x: 470, y: 1238, width: 555, height: 170 },
+    { x: 495, y: 1444, width: 555, height: 182 },
+    { x: 465, y: 1642, width: 675, height: 220 },
+  ]}
+/>
+
+At any step, users could return and find the same selections still in place, or clear them and start again.
+
+<ScreenshotComparison
+  eyebrow="Multi-step workflow"
+  title="Multiple steps preserved the same control while splitting content into easier-to-read views"
+  desktopSrc="images/field-dashboard/session-search-desktop.png"
+  desktopAlt="An anonymized desktop property search with filters above four-column preloaded results"
+  phoneSrc="images/field-dashboard/session-search-phone.png"
+  phoneAlt="An anonymized phone property search with full-width fields in one outlined page card"
+  phoneSrcSecondary="images/field-dashboard/session-results-phone.png"
+  phoneAltSecondary="An anonymized phone result screen with three compact property record cards"
+  caption="The desktop keeps the filters and result table together. On the phone, submitting the form opens a separate list of matching records."
+/>
+
+This introduced navigation state that the desktop layout did not need. The submitted search and its results had to remain available while someone moved deeper into a session. Back returned to the previous screen with that context intact. A new search replaced the result set and cleared the old selection.
+
+```text
+submitSearch(filters):
+  context = { filters, results: search(filters), selected: null }
+  view = "results"
+
+openResult(session):
+  context.selected = session
+  view = "summary"
+
+back():
+  view = previousView(view)   // context remains available
+```
+
+## When migrations in a legacy codebase collide
+
+The responsive work was added while the application was also moving to a newer Angular version and a newer PrimeNG component library. The PrimeNG migration was motivated in part by WCAG 2.0 requirements, which I kept in mind while making choices for the mobile experience, including the [W3C guidance on reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html). A reported bug could come from the mobile feature, either migration, or the interaction between them.
+
+Martin Fowler's [Patterns of Legacy Displacement](https://martinfowler.com/articles/patterns-legacy-displacement/) describes the same tension: new requirements keep moving while the underlying technology is being replaced. Here, the harder part was separating framework changes from PrimeNG changes and feature work that were moving at the same time.
+
+Users were attached to the legacy version, so I had to make sure the desktop version kept parity, except for intended PrimeNG changes, even when the mobile work affected shared code.
+
+Before assigning a bug to the mobile work, I checked the same path against the relevant branches and noted where the behaviour first changed. The order of merges mattered because migrated templates and component events could affect the feature, while feature styles could expose a change in PrimeNG. Keeping branches scoped and recording which change belonged where made the regression work more reliable.
+
+I compared the related pages at desktop and mobile widths as those styles were introduced. The goal was for both versions to look like the same product, even though the mobile version used a different sequence of screens.
+
+## Conclusion
+
+The mobile version kept the dashboard’s two-level structure while breaking each detailed workspace into focused views. Persistent filters and selections preserved context as users moved through search, results, summaries, readings, charts, and maps. The chart redesign improved readability on a smaller screen, while desktop parity and regression tracking protected the workflow existing users knew. The broader question is not how to make a desktop product smaller, but how much its structure can change before the relationships that make it useful are lost. Although my immediate goal was to make the application mobile-friendly, coordinating it with the Angular and PrimeNG migrations showed both why the legacy codebase and interface needed to be modernized and that the modernization could be done incrementally.
