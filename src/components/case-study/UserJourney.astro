@@ -232,7 +232,7 @@ const journeyId = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-
     }
 
     li:not(:last-child)::after {
-      top: 100%;
+      top: calc(100% + 2px);
       right: auto;
       bottom: auto;
       left: 50%;
