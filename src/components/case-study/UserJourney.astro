@@ -231,14 +231,27 @@ const journeyId = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-
     }
 
     li:not(:last-child)::after {
-      content: "➜";
-      top: auto;
+      content: "";
+      top: calc(100% + .275rem);
       right: auto;
-      bottom: -1.65rem;
+      bottom: auto;
       left: 50%;
-      width: 1.65rem;
-      height: 1.65rem;
-      transform: translateX(-50%) rotate(90deg);
+      width: 3px;
+      height: .75rem;
+      background: #169b52;
+      transform: translateX(-50%);
+    }
+
+    li:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: calc(100% + 1.025rem);
+      left: 50%;
+      z-index: 2;
+      border-top: .35rem solid #169b52;
+      border-right: .35rem solid transparent;
+      border-left: .35rem solid transparent;
+      transform: translateX(-50%);
     }
   }
 </style>
